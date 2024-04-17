@@ -1,0 +1,56 @@
+<foods>
+    <food>
+        <name>Μουσακάς</name>
+        <creator>Ελλάδα</creator>
+        <year>1950</year>
+        <price>8.50</price>
+    </food>
+    <food>
+        <name>Σουβλάκι</name>
+        <creator>Ελλάδα</creator>
+        <year>1900</year>
+        <price>6.00</price>
+    </food>
+    <food>
+        <name>Γύρος</name>
+        <creator>Ελλάδα</creator>
+        <year>1960</year>
+        <price>5.50</price>
+    </food>
+    <food>
+        <name>Μπακαλιάρος</name>
+        <creator>Πορτογαλία</creator>
+        <year>1850</year>
+        <price>12.00</price>
+    </food>
+    <food>
+        <name>Σαγανάκι</name>
+        <creator>Ελλάδα</creator>
+        <year>1860</year>
+        <price>7.50</price>
+    </food>
+    <food>
+        <name>Τζατζίκι</name>
+        <creator>Ελλάδα</creator>
+        <year>1990</year>
+        <price>4.50</price>
+    </food>
+    <food>
+        <name>Κοτόπουλο Λεμονάτο</name>
+        <creator>Ελλάδα</creator>
+        <year>1994</year>
+        <price>9.00</price>
+    </food>
+    <food>
+        <name>Χοιρινό Κοκκινιστό</name>
+        <creator>Ελλάδα</creator>
+        <year>1900</year>
+        <price>10.00</price>
+    </food>
+    <food>
+        <name>Μελιτζάνες Γεμιστές</name>
+        <creator>Ελλάδα</creator>
+        <year>1855</year>
+        <price>6.50</price>
+    </food>
+</foods>
