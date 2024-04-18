@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="kentrarisma">
+        <button type="button" onclick="loadXMLDoc();">Εμφάνισε τη λίστα</button>
+        <div class="buttons" style="display: none;"> 
+            <button type="button" onclick="sortFoodTable(1)">Ταξινόμηση ανά Δημιουργός</button>
+            <button type="button" onclick="sortByPrice(3)">Ταξινόμηση ανά Τιμή</button>
+            <button type="button" onclick="sortByYear(2)">Ταξινόμηση ανά Έτος Δημιουργίας</button>
+        </div>
+        <br><br>
+        <table id="foodTable" style="display: none;"></table>
+        <h3 id="foodHeader" style="display: none;">ΠΑΡΑΔΟΣΙΑΚΑ ΦΑΓΗΤΑ</h3>
+        <p id="sorted_food_list"></p>
+    </div>
+
+    <script>
+        function loadXMLDoc() {
+            var buttonDiv = document.querySelector('.buttons');
+            var table = document.getElementById('foodTable');
+            var header = document.getElementById('foodHeader');
+
+            buttonDiv.style.display = 'block';
+            table.style.display = 'block';
+            header.style.display = 'block';
+
+            // Εδώ θα έπρεπε να εκτελεστεί ο κώδικας για τη φόρτωση του XML
+            // Αφού δεν έχουμε πραγματικά δεδομένα XML, θα δημιουργήσουμε ένα παραδειγματικό στατικό πίνακα
+
+            var foods = [
+                { name: "Μουσακάς", creator: "Ελλάδα", year: "1950", price: "8.50" },
+                { name: "Σουβλάκι", creator: "Ελλάδα", year: "1900", price: "6.00" },
+                { name: "Γύρος", creator: "Ελλάδα", year: "1960", price: "5.50" },
+                { name: "Μπακαλιάρος", creator: "Πορτογαλία", year: "1850", price: "12.00" },
+                { name: "Σαγανάκι", creator: "Ελλάδα", year: "1860", price: "7.50" },
+                { name: "Τζατζίκι", creator: "Ελλάδα", year: "1990", price: "4.50" },
+                { name: "Κοτόπουλο Λεμονάτο", creator: "Ελλάδα", year: "1994", price: "9.00" },
+                { name: "Χοιρινό Κοκκινιστό", creator: "Ελλάδα", year: "1900", price: "10.00" },
+                { name: "Μελιτζάνες Γεμιστές", creator: "Ελλάδα", year: "1855", price: "6.50" }
+            ];
+
+            var tableContent = "<tr><th>Όνομα</th><th>Δημιουργός</th><th>Έτος Δημιουργίας</th><th>Τιμή</th></tr>";
+
+            for (var i = 0; i < foods.length; i++) {
+                tableContent += "<tr><td>" + foods[i].name + "</td><td>" + foods[i].creator + "</td><td>" + foods[i].year + "</td><td>" + foods[i].price + "</td></tr>";
+            }
+
+            table.innerHTML = tableContent;
+        }
+
+        function sortFoodTable(n) {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = document.getElementById("foodTable");
+            switching = true;
+            dir = "asc";
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+                shouldSwitch = false; 
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    x = rows[i].getElementsByTagName("td")[n];
+                    y = rows[i + 1].getElementsByTagName("td")[n];
+
+                    if (dir == "asc") {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    } else if (dir == "desc") {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase()) {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                } else {
+                    if (switchcount == 0 && dir == "asc") {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }
+
+        function sortByPrice() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("foodTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++) {
+                    shouldSwitch = false;
+                    x = parseFloat(rows[i].getElementsByTagName("td")[3].innerHTML);
+                    y = parseFloat(rows[i + 1].getElementsByTagName("td")[3].innerHTML);
+
+                    if (x > y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+
+        function sortByYear() {
+            var table, rows, switching, i, x, y, shouldSwitch;
+            table = document.getElementById("foodTable");
+            switching = true;
+
+            while (switching) {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length -1 ); i++) {
+                    shouldSwitch = false;
+                    x = parseInt(rows[i].getElementsByTagName("td")[2].innerHTML);
+                    y = parseInt(rows[i + 1].getElementsByTagName("td")[2].innerHTML);
+
+                    if (x < y) {
+                        shouldSwitch = true;
+                        break;
+                    }
+                }
+
+                if (shouldSwitch) {
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                }
+            }
+        }
+    </script>
+</body>
+</html>
